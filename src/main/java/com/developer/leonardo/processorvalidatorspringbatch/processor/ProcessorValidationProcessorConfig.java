@@ -2,7 +2,6 @@ package com.developer.leonardo.processorvalidatorspringbatch.processor;
 
 import com.developer.leonardo.processorvalidatorspringbatch.dto.Cliente;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.support.CompositeItemProcessor;
 import org.springframework.batch.item.support.builder.CompositeItemProcessorBuilder;
 import org.springframework.batch.item.validator.BeanValidatingItemProcessor;
 import org.springframework.batch.item.validator.ValidatingItemProcessor;
@@ -25,7 +24,6 @@ public class ProcessorValidationProcessorConfig {
                 .delegates(validatingItemProcessor(), beanValidatingItemProcessor())
                 .build();
     }
-
 
     private ValidatingItemProcessor<Cliente> validatingItemProcessor() throws Exception {
         ValidatingItemProcessor<Cliente> validatingItemProcessor = new ValidatingItemProcessor<Cliente>(); // criando de forma manual e customizada

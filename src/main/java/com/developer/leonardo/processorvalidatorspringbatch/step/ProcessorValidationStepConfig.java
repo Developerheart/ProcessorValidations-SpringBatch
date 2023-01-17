@@ -7,6 +7,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,13 +22,13 @@ public class ProcessorValidationStepConfig {
     @Bean
     public Step processorStep(
             ItemReader<Cliente> processorValidationReader,
-            ItemProcessor<Cliente, Cliente> processorValidationProc,
+            @Qualifier("clienteItemProcessor") ItemProcessor<Cliente, Cliente> clienteItemProcessor,
             ItemWriter<Cliente> processorValidatorWriter) {
         return stepBuilderFactory
                 .get("processorStep")
-                .<Cliente, Cliente>chunk(1)
+                .<Cliente, Cliente>chunk(2)
                 .reader(processorValidationReader)
-                .processor(processorValidationProc)
+                .processor(clienteItemProcessor)
                 .writer(processorValidatorWriter)
                 .build();
     }
