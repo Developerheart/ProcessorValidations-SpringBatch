@@ -25,7 +25,7 @@ public class ProcessorValidationStepConfig {
             ItemWriter<Cliente> processorValidatorWriter) {
         return stepBuilderFactory
                 .get("processorStep")
-                .<Cliente, Cliente>chunk(2)
+                .<Cliente, Cliente>chunk(1)
                 .reader(processorValidationReader)
                 .processor(processorValidationProc)
                 .writer(processorValidatorWriter)
